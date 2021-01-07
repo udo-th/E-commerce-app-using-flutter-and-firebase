@@ -27,8 +27,8 @@ class _ColorGroupButtonState extends State<ColorGroupButton> {
               widget.selectColor(index);
             },
             child: Container(
-              width: 60.0,
-              height: 60.0,
+              width: 40.0,
+              height: 40.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: widget.colorList[index].keys.toList()[0]
