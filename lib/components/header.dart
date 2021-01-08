@@ -28,8 +28,8 @@ Widget header(String headerText,GlobalKey<ScaffoldState> scaffoldKey,bool  showI
         fontFamily: 'NovaSquare'
       ),
     ),
-    backgroundColor: Colors.white,
-    elevation: 1.0,
+    backgroundColor: Color(0xff4ceefb),
+    elevation: 0,
     automaticallyImplyLeading: false,
     leading: IconButton(
       icon: Icon(

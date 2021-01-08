@@ -73,14 +73,17 @@ class _ParticularItemState extends State<ParticularItem> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(
             SizeConfig.safeBlockHorizontal * 4.5,
-            SizeConfig.topPadding * 1.2,
+            SizeConfig.topPadding,
             SizeConfig.safeBlockHorizontal * 4.5,
-            SizeConfig.topPadding * 3
+            SizeConfig.topPadding * 2
           ),
           child: SizedBox(
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
             child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35)
+              ),
               color: Colors.white,
               elevation: 10.0,
               margin: EdgeInsets.zero,
@@ -91,7 +94,7 @@ class _ParticularItemState extends State<ParticularItem> {
                     borderRadius:BorderRadius.circular(30.0),
                       child: Image.network(
                         widget.itemDetails['image'],
-                        height: SizeConfig.screenHeight / 2.4,
+                        height: SizeConfig.screenHeight / 2.65,
                       )
                   ),
                   Expanded(
@@ -148,6 +151,9 @@ class _ParticularItemState extends State<ParticularItem> {
                           SizedBox(
                             width: SizeConfig.screenWidth,
                             child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
                               elevation: 8.0,
                               color: Colors.white,
                               child: Padding(
@@ -176,28 +182,49 @@ class _ParticularItemState extends State<ParticularItem> {
                                         fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    ListView.builder(
-                                      itemCount: widget.itemDetails['size'].length,
-                                      itemBuilder: (context,index){
-                                        return Card(
-                                          child: Text(
-                                            widget.itemDetails['size'][index]
-                                          ),
-                                        );
-                                      })
+                                    Container(
+                                      height: 55.0,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context,index){
+                                          return Container(
+                                            width: 45.0,
+                                            margin: EdgeInsets.all(6.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(100.0),
+                                              border: Border.all(
+                                                width: 2.0,
+                                                style: BorderStyle.solid,
+                                                color: Colors.black
+                                              )
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                widget.itemDetails['size'][index],
+                                                style: TextStyle(
+                                                  fontFamily: 'NovaSquare',
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                              )
+                                            ),
+                                          );
+                                        },
+                                        itemCount: widget.itemDetails['size'].length,
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          RaisedButton(onPressed: (){})
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(35)
               ),
             ),
           ),

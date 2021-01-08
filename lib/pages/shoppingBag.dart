@@ -138,7 +138,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
             type: CustomTransitionType.downToUp,
             child: ParticularItem(
               itemDetails: args,
-              edit: true,
+              editOrder: true,
             )
         )
     );
