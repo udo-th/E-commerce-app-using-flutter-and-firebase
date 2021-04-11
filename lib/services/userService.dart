@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
 import 'package:corsac_jwt/corsac_jwt.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService{
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final storage = new FlutterSecureStorage();
   final String sharedKey = 'sharedKey';
+  final tokenKey = 'token';
   int statusCode;
   String msg;
 
@@ -23,8 +26,36 @@ class UserService{
 
     var signer = new JWTHmacSha256Signer(sharedKey);
     var signedToken = builder.getSignedToken(signer);
-    await storage.write(key: 'token', value: signedToken.toString());
+    await _writeToken(signedToken.toString());
   }
+
+  Future _writeToken(String token) async {
+    if (!kIsWeb) {
+      storage.write(key: tokenKey, value: token);
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(tokenKey, token);
+    }
+  }
+
+  Future<String> readToken() async {
+    if (!kIsWeb) {
+      return await storage.read(key: tokenKey);
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getString(tokenKey);
+    }
+  }
+
+  Future _deleteToken() async {
+    if (!kIsWeb) {
+      await storage.delete(key: tokenKey);
+    }else {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.remove(tokenKey);
+    }
+  }
+
 
   String validateToken(String token){
     var signer = new JWTHmacSha256Signer(sharedKey);
@@ -44,7 +75,7 @@ class UserService{
   }
 
   void logOut(context) async{
-    await storage.delete(key: 'token');
+    await _deleteToken();
     Navigator.of(context).pushReplacementNamed('/');
   }
 
@@ -75,7 +106,7 @@ class UserService{
     String email = userValues['email'];
     String password = userValues['password'];
 
-    await _auth.createUserWithEmailAndPassword(email: email, password: password).then((dynamic user){
+    await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user){
       String uid = user.user.uid;
       _firestore.collection('users').add({
         'fullName': userValues['fullName'],

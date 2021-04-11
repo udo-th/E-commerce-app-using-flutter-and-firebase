@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
         Navigator.pushNamed(context, '/home');
       }
       else{
-        AlertBox alertBox = AlertBox(_userService.msg);
+        AlertBox alertBox = AlertBox("" + _userService.msg);
         return showDialog(
           context: context,
           builder: (BuildContext context){
