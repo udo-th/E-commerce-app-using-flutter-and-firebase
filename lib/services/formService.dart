@@ -1,4 +1,4 @@
-class ValidateService{
+class FormService{
   String isEmptyField(String value) {
     if (value.isEmpty) {
       return 'Required';
@@ -13,9 +13,9 @@ class ValidateService{
     if(isEmpty != null){
       return isEmpty;
     }
-    else if(len != 10){
-      return "Mobile Number must be of 10 digits";
-    }
+    // else if(len != 10){
+    //   return "Mobile Number must be of 10 digits";
+    // }
     return null;
   }
 
@@ -34,15 +34,13 @@ class ValidateService{
   }
 
   String validatePassword(String value){
-    String isEmpty = isEmptyField(value);
-    String pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$';
-    RegExp regExp = new RegExp(pattern);
+    final String isEmpty = isEmptyField(value);
+    final pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$';
 
-    if(isEmpty != null){
+    if (isEmpty != null) {
       return isEmpty;
-    }
-    else if(!regExp.hasMatch(value)){
-      return "Minimum eight characters, at least one letter and one number";
+    } else if (!new RegExp(pattern).hasMatch(value)) {
+      return "at least six alphanumeric only, at least one letter and one number";
     }
     return null;
   }

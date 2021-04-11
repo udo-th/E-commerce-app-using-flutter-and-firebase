@@ -4,7 +4,7 @@ import 'package:app_frontend/components/sidebar.dart';
 import 'package:app_frontend/components/header.dart';
 import 'package:app_frontend/components/loader.dart';
 import 'package:app_frontend/services/profileService.dart';
-import 'package:app_frontend/services/validateService.dart';
+import 'package:app_frontend/services/formService.dart';
 import 'package:app_frontend/sizeConfig.dart';
 
 class EditProfile extends StatefulWidget {
@@ -14,7 +14,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  ValidateService _validateService  = new ValidateService();
+  FormService _validateService  = new FormService();
   ProfileService _profileService = new ProfileService();
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();

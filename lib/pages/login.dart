@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:app_frontend/components/loader.dart';
 import 'package:app_frontend/services/userService.dart';
-import 'package:app_frontend/services/validateService.dart';
+import 'package:app_frontend/services/formService.dart';
 import 'package:app_frontend/components/alertBox.dart';
 
 
@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
 
   double borderWidth = 2.0;
 
-  ValidateService _validateService = ValidateService();
+  FormService _validateService = FormService();
   UserService _userService = UserService();
 
   login() async{

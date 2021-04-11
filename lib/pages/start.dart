@@ -1,3 +1,4 @@
+import 'package:app_frontend/services/userService.dart';
 import 'package:app_frontend/sizeConfig.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,7 @@ class Start extends StatelessWidget{
 
   validateToken(context) async{
     final String value = await _userService.readToken();
-    if(value != null){
+    if(value != null) {
       String decodedToken = _userService.validateToken(value);
       if(decodedToken != null){
         Navigator.of(context).pushReplacementNamed('/home');
