@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:app_frontend/services/validateService.dart';
+import 'package:app_frontend/services/formService.dart';
 
 class ShippingAddressInput extends StatefulWidget {
   final HashMap addressValues;
@@ -37,7 +37,7 @@ class _ShippingAddressInputState extends State<ShippingAddressInput> {
 
   @override
   Widget build(BuildContext context) {
-    ValidateService _validateService = new ValidateService();
+    FormService _validateService = new FormService();
     return Column(
       children: <Widget>[
         SizedBox(

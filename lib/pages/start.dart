@@ -1,25 +1,20 @@
+import 'package:app_frontend/services/userService.dart';
 import 'package:app_frontend/sizeConfig.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-import 'package:app_frontend/services/userService.dart';
 
 class Start extends StatelessWidget{
   final UserService _userService = new UserService();
 
   validateToken(context) async{
-    final storage = new FlutterSecureStorage();
-    String value = await storage.read(key: 'token');
-    if(value != null){
+    final String value = await _userService.readToken();
+    if(value != null) {
       String decodedToken = _userService.validateToken(value);
       if(decodedToken != null){
         Navigator.of(context).pushReplacementNamed('/home');
-      }
-      else{
+      } else {
         Navigator.of(context).pushReplacementNamed('/login');
       }
-    }
-    else{
+    } else {
       Navigator.of(context).pushReplacementNamed('/login');
     }
   }

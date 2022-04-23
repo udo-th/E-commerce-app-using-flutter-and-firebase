@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:app_frontend/components/alertBox.dart';
 import 'package:app_frontend/services/userService.dart';
-import 'package:app_frontend/services/validateService.dart';
+import 'package:app_frontend/services/formService.dart';
 
 import '../sizeConfig.dart';
 
@@ -19,7 +19,7 @@ class _SignUpState extends State<SignUp> {
   Map customWidth = new Map<String,double>();
   double fieldPadding;
 
-  ValidateService validateService = ValidateService();
+  FormService validateService = FormService();
   UserService userService = UserService();
 
   setBorder(double width, Color color) {
